@@ -8,13 +8,9 @@ import pandas_gbq
 from google.oauth2 import service_account
 
 import functions_framework
-# creating sparksession and giving  
-# an app name 
-# spark = SparkSession.builder.appName('sparkdf').getOrCreate() 
 # from google.cloud import storage
 
 # definicja beautifulsoup
-# html = urlopen('https://gratka.pl/nieruchomosci/mieszkania')
 # bs = BeautifulSoup(html.read(), 'html.parser')
 
 def get_info_from_current_page(page:int):
@@ -80,7 +76,6 @@ def upload_df_to_gcs(df:pd.DataFrame, bucket_name:str, filepath:str):
     """
     Uploading data to Google big query
     """
-    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'data-engineering-391216-e689358cbc11.json'
     client = storage.Client()
     bucket = client.get_bucket(bucket_name)
         
@@ -91,7 +86,11 @@ def upload_to_big_query(df:pd.DataFrame, path_to_cred:str):
     credentials = service_account.Credentials.from_service_account_file(
     path_to_cred,
     )
-    pandas_gbq.to_gbq(df, 'gratka.ogloszenia', project_id="data-engineering-391216", credentials=credentials, if_exists='append')
+    pandas_gbq.to_gbq(df, 
+                      'gratka.ogloszenia', 
+                      project_id="data-engineering-391216", 
+                      credentials=credentials, 
+                      if_exists='append')
 
 
 def get_info_from_pages(pages:int):
