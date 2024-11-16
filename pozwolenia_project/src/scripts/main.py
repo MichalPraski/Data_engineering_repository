@@ -78,5 +78,5 @@ with DAG('my_dag',
         )
 
 
-    # Definiowanie zależności między zadaniami
+    # Defining dependencies between tasks
     task1 >> task2 >> task3
