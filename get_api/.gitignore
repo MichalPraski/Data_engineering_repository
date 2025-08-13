@@ -1,0 +1,10 @@
+.venv
+.env
+.json
+venv
+env
+json
+
+*.venv
+*.env
+*.json
